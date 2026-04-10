@@ -91,7 +91,7 @@ describe('multi-runtime selection parsing', () => {
   });
 
   test('single choice for qwen', () => {
-    assert.deepStrictEqual(parseRuntimeInput('10'), ['qwen']);
+    assert.deepStrictEqual(parseRuntimeInput('12'), ['qwen']);
   });
 
   test('single choice for trae', () => {
@@ -112,13 +112,13 @@ describe('multi-runtime selection parsing', () => {
   });
 
   test('invalid choices are ignored, falls back to claude if all invalid', () => {
-    assert.deepStrictEqual(parseRuntimeInput('15'), ['claude']);
+    assert.deepStrictEqual(parseRuntimeInput('99'), ['claude']);
     assert.deepStrictEqual(parseRuntimeInput('0'), ['claude']);
     assert.deepStrictEqual(parseRuntimeInput('abc'), ['claude']);
   });
 
   test('invalid choices mixed with valid are filtered out', () => {
-    assert.deepStrictEqual(parseRuntimeInput('1,15,7'), ['claude', 'copilot']);
+    assert.deepStrictEqual(parseRuntimeInput('1,99,7'), ['claude', 'copilot']);
     assert.deepStrictEqual(parseRuntimeInput('abc 3 xyz'), ['augment']);
   });
 
